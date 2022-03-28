@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ShogiModule } from './shogi/shogi.module';
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    ShogiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
