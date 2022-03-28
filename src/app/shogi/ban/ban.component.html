@@ -1,3 +1,14 @@
-<mat-grid-list cols="9" rowHeight="1:1">
-    <mat-grid-tile *ngFor="let m of matrix">{{m}}</mat-grid-tile>
-</mat-grid-list>
+<div (window:resize)="onResize($event)"></div>
+<div cdkDropListGroup>
+    <mat-grid-list cols="9" rowHeight="{{rh}}">
+        <div
+            cdkDropList
+            [cdkDropListData]="matrix"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <mat-grid-tile *ngFor="let m of matrix" cdkDrag>
+                {{m}}
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+</div>
