@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
+const RH_MIN = 45, RH_MAX = 80;
+
 @Component({
   selector: 'by-ban',
   templateUrl: './ban.component.html',
@@ -8,6 +10,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/dr
 })
 export class BanComponent implements OnInit {
 
+  gote_images = [...Array(16)].map((_, i) => "assets/koma/gote/" + (i + 1) + ".png");
+  sente_images = [...Array(16)].map((_, i) => "assets/koma/sente/" + (i + 1) + ".png");
   matrix: number[] = [...Array(81)].map((_, i) => i);
   rh = 0;
 
@@ -19,12 +23,6 @@ export class BanComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<number[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex,
-      );
-    }
   }
 
   onResize(event: any) {
@@ -33,6 +31,6 @@ export class BanComponent implements OnInit {
 
   calcRh(width: number): number {
     const temp = width * 49.05 / 1000;
-    return temp > 45 ? temp > 80 ? 80 : temp : 45;
+    return temp > RH_MIN ? temp > RH_MAX ? RH_MAX : temp : RH_MIN;
   }
 }

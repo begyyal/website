@@ -1,8 +1,6 @@
 :host{
     margin: 30px;
-    width:50%;
-    min-width: 405px;
-    max-width: 720px;
+    width: 100%;
     display: block;
 }
 
@@ -10,24 +8,43 @@ mat-grid-tile {
     background: lightblue;
 }
 
-.cdk-drag {
-    height: 0px;
+.ban-col1 {
+    float: left;
+    width: 50%;
+    min-width: 405px;
+    max-width: 720px;
 }
 
-.cdk-drop-dragging {
-    height: 0px;
+.ban-col2 {
+    float: left;
+    width: 40%;
+    min-width: 324px;
+    max-width: 556px;
+    margin-top: 10px;
+    margin-left: 30px;
 }
 
-.cdk-drop-list-dragging {
-    background: lightblue;
+.sente_koma_contents {
+    top: 30px
 }
 
-.cdk-drag-handle{
-    background: lightblue;
-}
+// .cdk-drag {
+//     height: 0px;
+// }
+
+// .cdk-drop-dragging {
+//     height: 0px;
+// }
+
+// .cdk-drop-list-dragging {
+//     background: lightblue;
+// }
+
+// .cdk-drag-handle{
+//     background: lightblue;
+// }
 
 .cdk-drag-preview {
-    height: 0%;
     background: lightblue;
     box-sizing: border-box;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
@@ -36,7 +53,6 @@ mat-grid-tile {
 }
 
 .cdk-drag-placeholder {
-    height: 0%;
     opacity: 0;
 }
   

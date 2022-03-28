@@ -1,14 +1,27 @@
-<div (window:resize)="onResize($event)"></div>
-<div cdkDropListGroup>
-    <mat-grid-list cols="9" rowHeight="{{rh}}">
-        <div
-            cdkDropList
-            [cdkDropListData]="matrix"
-            class="example-list"
-            (cdkDropListDropped)="drop($event)">
-            <mat-grid-tile *ngFor="let m of matrix" cdkDrag>
-                {{m}}
+<div class="ban-contents" (window:resize)="onResize($event)">
+    <div class="ban-col1" cdkDropListGroup>
+        <mat-grid-list cols="9" rowHeight="{{rh}}">
+            <div
+                cdkDropList
+                [cdkDropListData]="matrix"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <mat-grid-tile *ngFor="let m of matrix" cdkDrag>
+                    {{m}}
+                </mat-grid-tile>
+            </div>
+        </mat-grid-list>
+    </div>
+    <div class="ban-col2">
+        <mat-grid-list class="gote_koma_contents" cols="8" rowHeight="{{rh}}">
+            <mat-grid-tile *ngFor="let i of gote_images">
+                <img *ngIf="i" [src]="i" [width]="rh*0.86" [height]="rh">
             </mat-grid-tile>
-        </div>
-    </mat-grid-list>
+        </mat-grid-list>
+        <mat-grid-list class="sente_koma_contents" cols="8" rowHeight="{{rh}}">
+            <mat-grid-tile *ngFor="let i of sente_images">
+                <img *ngIf="i" [src]="i" [width]="rh*0.86" [height]="rh">
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
 </div>
