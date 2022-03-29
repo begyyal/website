@@ -16,25 +16,29 @@ mat-select {
     float: left;
     width: 50%;
     min-width: 405px;
-    max-width: 720px;
+    max-width: 630px;
 }
 
 .ban-col2 {
     float: left;
     width: 40%;
     min-width: 324px;
-    max-width: 556px;
+    max-width: 504px;
     margin-top: 0px;
     margin-left: 30px;
 }
 
+.gote_koma_contents {
+    top: 5px;
+}
+
 .sente_koma_contents {
-    top: 10px;
+    top: 15px;
 }
 
 .mtgm {
     position: relative;
-    top: 25px;
+    top: 20px;
 }
 
 .mtgm_label {
@@ -54,6 +58,30 @@ mat-select {
 .mtgm_contents {
     float: left;
     width: 87.5%;
+    color: black;
+    font-weight: 800;
+}
+
+.control_and_display {
+    position: relative;
+    top: 30px;
+}
+
+.button_contents {
+    button {
+        font-weight: 800;
+        width: 90%;
+        min-height: 30px;
+        margin-top: 10px;
+    }
+    float: left;
+    width: 20%;
+    position: relative;
+}
+
+.result_display {
+    float: left;
+    width: 80%;
     color: black;
     font-weight: 800;
 }

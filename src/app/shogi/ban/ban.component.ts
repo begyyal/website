@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
-const RH_MIN = 45, RH_MAX = 80;
+const RH_MIN = 45, RH_MAX = 70;
 const MTGM_LABEL = ["飛車", "角", "金", "銀", "桂馬", "香車", "歩"];
 
 @Component({
