@@ -6,6 +6,7 @@ import { ShogiRoutingModule } from './shogi-routing.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { MatSelectModule } from '@angular/material/select'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatGridListModule,
     CommonModule,
     DragDropModule,
+    MatSelectModule,
     BrowserAnimationsModule
   ],
   providers: []

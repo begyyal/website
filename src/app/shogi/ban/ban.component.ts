@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
 const RH_MIN = 45, RH_MAX = 80;
+const MTGM_LABEL = ["飛車", "角", "金", "銀", "桂馬", "香車", "歩"];
 
 @Component({
   selector: 'by-ban',
@@ -10,8 +11,10 @@ const RH_MIN = 45, RH_MAX = 80;
 })
 export class BanComponent implements OnInit {
 
+  mtgm_tile_count = [...Array(14)].map((_, i) => i);
   gote_images = this.createImagePaths("gote");
   sente_images = this.createImagePaths("sente");
+
   matrix: number[] = [...Array(81)].map((_, i) => i);
   rh = 0;
 
@@ -28,6 +31,10 @@ export class BanComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<number[]>) {
+  }
+
+  getMtgmLabel(idx: number) {
+    return MTGM_LABEL.length - 1 < idx ? null : MTGM_LABEL[idx];
   }
 
   onResize(event: any) {
