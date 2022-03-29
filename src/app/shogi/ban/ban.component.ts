@@ -10,8 +10,8 @@ const RH_MIN = 45, RH_MAX = 80;
 })
 export class BanComponent implements OnInit {
 
-  gote_images = [...Array(16)].map((_, i) => "assets/koma/gote/" + (i + 1) + ".png");
-  sente_images = [...Array(16)].map((_, i) => "assets/koma/sente/" + (i + 1) + ".png");
+  gote_images = this.createImagePaths("gote");
+  sente_images = this.createImagePaths("sente");
   matrix: number[] = [...Array(81)].map((_, i) => i);
   rh = 0;
 
@@ -20,6 +20,11 @@ export class BanComponent implements OnInit {
 
   ngOnInit() {
     this.rh = this.calcRh(window.innerWidth);
+  }
+
+  private createImagePaths(player: string) {
+    return [...Array(16)]
+      .map((_, i) => i == 8 || i == 11 ? null : "assets/koma/" + player + "/" + i + ".png");
   }
 
   drop(event: CdkDragDrop<number[]>) {
