@@ -1,140 +1,19 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
-    <div class="ban-col1" cdkDropListGroup>
+    <div class="ban-col1">
         <div class="ban">
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban1List="cdkDropList"
-                [cdkDropListData]="ban1"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban1" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
+            <mat-grid-list cols="9" rowHeight="{{rh}}">
+                <div *ngFor="let m of matrix; let i = index">
+                <mat-grid-tile
+                    cdkDropList
+                    id="masu_{{i}}"
+                    [cdkDropListData]="matrix[i]"
+                    (cdkDropListDropped)="drop($event)">
+                    <img *ngIf="matrix[i][0]" 
+                        [src]="matrix[i][0]" 
                         [width]="rh*0.86" 
                         [height]="rh">
                 </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban2List="cdkDropList"
-                [cdkDropListData]="ban2"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban2" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban3List="cdkDropList"
-                [cdkDropListData]="ban3"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban3" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban4List="cdkDropList"
-                [cdkDropListData]="ban4"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban4" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban5List="cdkDropList"
-                [cdkDropListData]="ban5"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban5" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban6List="cdkDropList"
-                [cdkDropListData]="ban6"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban6" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban7List="cdkDropList"
-                [cdkDropListData]="ban7"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban7" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban8List="cdkDropList"
-                [cdkDropListData]="ban8"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban8" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list 
-                cols="9" 
-                rowHeight="{{rh}}"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                #ban9List="cdkDropList"
-                [cdkDropListData]="ban9"
-                (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let m of ban9" cdkDrag>
-                    <img *ngIf="m" 
-                        [src]="m" 
-                        [width]="rh*0.86" 
-                        [height]="rh">
-                </mat-grid-tile>
+                </div>
             </mat-grid-list>
         </div>
         <div class="mtgm">
@@ -174,7 +53,7 @@
             rowHeight="{{rh}}"
             cdkDropList
             [cdkDropListData]="gote_images"
-            [cdkDropListConnectedTo]="[ban1List, ban2List, ban3List, ban4List, ban5List, ban6List, ban7List, ban8List, ban9List]">
+            [cdkDropListConnectedTo]="masu_ids">
             <mat-grid-tile *ngFor="let p of gote_images">
                 <img *ngIf="p" 
                     [src]="p" 
@@ -190,7 +69,7 @@
             rowHeight="{{rh}}"
             cdkDropList
             [cdkDropListData]="sente_images"
-            [cdkDropListConnectedTo]="[ban1List, ban2List, ban3List, ban4List, ban5List, ban6List, ban7List, ban8List, ban9List]">
+            [cdkDropListConnectedTo]="masu_ids">
             <mat-grid-tile *ngFor="let p of sente_images">
                 <img *ngIf="p" 
                     [src]="p" 

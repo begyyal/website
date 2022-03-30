@@ -15,17 +15,8 @@ export class BanComponent implements OnInit {
   gote_images = this.createImagePaths("gote");
   sente_images = this.createImagePaths("sente");
 
-  matrix = [...Array(81)].map((_, i) => "");
-  ban1 = [...Array(9)].map((_, i) => "");
-  ban2 = [...Array(9)].map((_, i) => "");
-  ban3 = [...Array(9)].map((_, i) => "");
-  ban4 = [...Array(9)].map((_, i) => "");
-  ban5 = [...Array(9)].map((_, i) => "");
-  ban6 = [...Array(9)].map((_, i) => "");
-  ban7 = [...Array(9)].map((_, i) => "");
-  ban8 = [...Array(9)].map((_, i) => "");
-  ban9 = [...Array(9)].map((_, i) => "");  
-
+  matrix = [...Array(81)].map((_, i) => [""]);
+  masu_ids = [...Array(81)].map((_, i) => "masu_" + i);
   rh = 0;
 
   constructor() {
@@ -43,8 +34,7 @@ export class BanComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     console.log(event.currentIndex);
     console.log(event.container.data);
-    if(event.currentIndex < event.container.data.length)
-      event.container.data[event.currentIndex] = event.item.data;
+    event.container.data[0] = event.item.data;
   }
 
   getMtgmLabel(idx: number) {
