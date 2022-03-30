@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
 const RH_MIN = 45, RH_MAX = 70;
 const MTGM_LABEL = ["飛車", "角", "金", "銀", "桂馬", "香車", "歩"];
@@ -15,7 +15,7 @@ export class BanComponent implements OnInit {
   gote_images = this.createImagePaths("gote");
   sente_images = this.createImagePaths("sente");
 
-  matrix: number[] = [...Array(81)].map((_, i) => i);
+  matrix = [...Array(81)].map((_, i) => "");
   rh = 0;
 
   constructor() {
@@ -30,7 +30,10 @@ export class BanComponent implements OnInit {
       .map((_, i) => i == 8 || i == 11 ? null : "assets/koma/" + player + "/" + i + ".png");
   }
 
-  drop(event: CdkDragDrop<number[]>) {
+  drop(event: CdkDragDrop<string[]>) {
+    const path = event.previousContainer.data[event.previousIndex];
+    console.log(path);
+    this.matrix[event.currentIndex] = path;
   }
 
   getMtgmLabel(idx: number) {

@@ -1,16 +1,21 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
     <div class="ban-col1" cdkDropListGroup>
-        <mat-grid-list cols="9" rowHeight="{{rh}}">
-            <div
+        <div class="ban">
+            <mat-grid-list 
+                cols="9" 
+                rowHeight="{{rh}}"
                 cdkDropList
+                #banList="cdkDropList"
                 [cdkDropListData]="matrix"
-                class="example-list"
                 (cdkDropListDropped)="drop($event)">
                 <mat-grid-tile *ngFor="let m of matrix" cdkDrag>
-                    {{m}}
+                    <img *ngIf="m" 
+                        [src]="m" 
+                        [width]="rh*0.86" 
+                        [height]="rh">
                 </mat-grid-tile>
-            </div>
-        </mat-grid-list>
+            </mat-grid-list>
+        </div>
         <div class="mtgm">
             <div class="mtgm_gote">
                 <div class="mtgm_label">後手<br>持駒</div>
@@ -42,14 +47,36 @@
     </div>
     <div class="ban-col2">
         <div>※盤上にドラッグ&ドロップして配置してください</div>
-        <mat-grid-list class="gote_koma_contents" cols="8" rowHeight="{{rh}}">
-            <mat-grid-tile *ngFor="let i of gote_images">
-                <img *ngIf="i" [src]="i" [width]="rh*0.86" [height]="rh">
+        <mat-grid-list 
+            class="gote_koma_contents" 
+            cols="8" 
+            rowHeight="{{rh}}"
+            cdkDropList
+            [cdkDropListData]="gote_images"
+            [cdkDropListConnectedTo]="[banList]">
+            <mat-grid-tile *ngFor="let p of gote_images; let i = index">
+                <img *ngIf="p" 
+                    [src]="p" 
+                    [width]="rh*0.86" 
+                    [height]="rh" 
+                    [cdkDragData]="i" 
+                    cdkDrag>
             </mat-grid-tile>
         </mat-grid-list>
-        <mat-grid-list class="sente_koma_contents" cols="8" rowHeight="{{rh}}">
-            <mat-grid-tile *ngFor="let i of sente_images">
-                <img *ngIf="i" [src]="i" [width]="rh*0.86" [height]="rh">
+        <mat-grid-list 
+            class="sente_koma_contents" 
+            cols="8" 
+            rowHeight="{{rh}}"
+            cdkDropList
+            [cdkDropListData]="sente_images"
+            [cdkDropListConnectedTo]="[banList]">
+            <mat-grid-tile *ngFor="let p of sente_images; let i = index">
+                <img *ngIf="p" 
+                    [src]="p" 
+                    [width]="rh*0.86" 
+                    [height]="rh" 
+                    [cdkDragData]="p" 
+                    cdkDrag>
             </mat-grid-tile>
         </mat-grid-list>
         <div class="control_and_display">
