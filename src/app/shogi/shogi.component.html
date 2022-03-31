@@ -5,7 +5,10 @@
         <by-mtgm></by-mtgm>
     </div>
     <div class="ban-col2">
-        <by-palette [rh]="rh"></by-palette>
+        <div>※盤上にドラッグ&ドロップして配置してください</div>
+        <div>※盤上から外にドラッグ&ドロップすることで削除できます</div>
+        <by-palette class="gote_koma_palette" [rh]="rh" [player]="'gote'"></by-palette>
+        <by-palette class="sente_koma_palette" [rh]="rh" [player]="'sente'"></by-palette>
         <div class="control_and_display">
             <div class="button_contents">
                 <button mat-stroked-button>計算する</button>

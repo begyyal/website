@@ -8,15 +8,13 @@ import { CdkDragDrop } from "@angular/cdk/drag-drop";
 })
 export class BanComponent {
 
-  @Input() matrix = [...Array(81)].map((_, i) => [""]);
-  @Input() rh = 0;
+  @Input() matrix : string[][];
+  @Input() rh: number;
 
   constructor() {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event.currentIndex);
-    console.log(event.container.data);
     event.container.data[0] = event.item.data;
   }
 }
