@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MasuState } from 'model/shogi/masu-state';
+import { Motigoma } from 'model/shogi/motigoma';
+import { Koma } from 'constant/shogi/koma';
+import { Player } from 'constant/shogi/player';
 
 const RH_MIN = 45, RH_MAX = 70;
 
@@ -11,6 +14,8 @@ const RH_MIN = 45, RH_MAX = 70;
 export class ShogiComponent implements OnInit {
 
   matrix: MasuState[] = [...Array(81)].map((_, i) => null);
+  senteMtgm: Motigoma[];
+  goteMtgm: Motigoma[];
   rh: number;
 
   constructor() {
@@ -18,6 +23,18 @@ export class ShogiComponent implements OnInit {
 
   ngOnInit() {
     this.rh = this.calcRh(window.innerWidth);
+    this.senteMtgm = this.createMotigoma(Player.Sente);
+    this.goteMtgm = this.createMotigoma(Player.Gote);
+  }
+
+  private createMotigoma(player: Player) {
+    return [Koma.Hisya, Koma.Kaku, Koma.Kin, Koma.Gin, Koma.Keima, Koma.Kyousya, Koma.Hu]
+      .map(k => {
+        return {
+          koma: k,
+          value: player == Player.Gote ? k.limit : 0
+        }
+      });
   }
 
   onResize(event: any) {
@@ -31,5 +48,11 @@ export class ShogiComponent implements OnInit {
 
   reset() {
     this.matrix = [...Array(81)].map((_, i) => null);
+  }
+
+  calc(){
+    console.log(this.senteMtgm);
+    console.log(this.goteMtgm);
+    console.log(this.matrix);
   }
 }

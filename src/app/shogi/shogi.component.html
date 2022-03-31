@@ -2,8 +2,8 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
     <div class="ban-col1">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
-        <by-mtgm class="mtgm_gote" [player]="'gote'"></by-mtgm>
-        <by-mtgm class="mtgm_sente" [player]="'sente'"></by-mtgm>
+        <by-mtgm class="mtgm_sente" [playerId]="'x'" [mtgm]="senteMtgm"></by-mtgm>
+        <by-mtgm class="mtgm_gote" [playerId]="'y'" [mtgm]="goteMtgm"></by-mtgm>
     </div>
     <div class="ban-col2">
         <div>※盤上にドラッグ&ドロップして配置してください</div>
@@ -12,7 +12,7 @@
         <by-palette class="sente_koma_palette" [rh]="rh" [player]="'x'"></by-palette>
         <div class="control_and_display">
             <div class="button_contents">
-                <button mat-stroked-button>計算する</button>
+                <button mat-stroked-button (click)="calc()">計算する</button>
                 <button mat-stroked-button (click)="reset()">リセット</button>
             </div>
             <by-result-display class="result-display"></by-result-display>

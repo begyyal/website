@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CdkDragDrop } from "@angular/cdk/drag-drop";
-
-const MTGM_LABEL = ["飛車", "角", "金", "銀", "桂馬", "香車", "歩"];
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { selectById, Player } from 'constant/shogi/player';
+import { Koma } from 'constant/shogi/koma';
+import { Motigoma } from 'model/shogi/motigoma';
 
 @Component({
   selector: 'by-mtgm',
@@ -10,18 +10,23 @@ const MTGM_LABEL = ["飛車", "角", "金", "銀", "桂馬", "香車", "歩"];
 })
 export class MtgmComponent implements OnInit {
 
-  @Input() player: string;
-  mtgm_tile_count = [...Array(14)].map((_, i) => i);
-  pLabel: string;
+  @Input()
+  mtgm: Motigoma[];
+  opValues: number[][];
+
+  @Input() playerId: string;
+  mtgm_tile_count = [...Array(7)].map((_, i) => i);
+  player: Player;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.pLabel = this.player == "gote" ? "後手" : "先手";
+    this.player = selectById(this.playerId);
+    this.opValues = this.mtgm.map(op => [...Array(op.koma.limit + 1)].map((_, i) => i));
   }
 
   getMtgmLabel(idx: number) {
-    return MTGM_LABEL.length - 1 < idx ? null : MTGM_LABEL[idx];
+    return this.mtgm[idx].koma.desc;
   }
 }

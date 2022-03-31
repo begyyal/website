@@ -1,11 +1,15 @@
-<div class="mtgm_label">{{pLabel}}<br>持駒</div>
-    <mat-grid-list class="mtgm_contents" cols="7" rowHeight="30">
-        <mat-grid-tile *ngFor="let i of mtgm_tile_count">
-        <div *ngIf="i<=6">{{getMtgmLabel(i)}}</div>
-        <mat-select *ngIf="i>6">
-            <mat-option value="1">11</mat-option>
-            <mat-option value="2">21</mat-option>
-            <mat-option value="3">31</mat-option>
+<div class="mtgm_label">{{player.desc2}}<br>持駒</div>
+<mat-grid-list class="mtgm_contents" cols="7" rowHeight="30">
+    <mat-grid-tile *ngFor="let i of mtgm_tile_count">
+        {{getMtgmLabel(i)}}
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list class="mtgm_contents" cols="7" rowHeight="30">
+    <mat-grid-tile *ngFor="let i of mtgm_tile_count">
+        <mat-select [(value)]="mtgm[i].value">
+            <mat-option *ngFor="let v of opValues[i]" [value]="v">
+                {{v}}
+            </mat-option>
         </mat-select>
     </mat-grid-tile>
 </mat-grid-list>
