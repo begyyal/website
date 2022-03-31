@@ -2,7 +2,8 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
     <div class="ban-col1">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
-        <by-mtgm></by-mtgm>
+        <by-mtgm class="mtgm_gote" [player]="'gote'"></by-mtgm>
+        <by-mtgm class="mtgm_sente" [player]="'sente'"></by-mtgm>
     </div>
     <div class="ban-col2">
         <div>※盤上にドラッグ&ドロップして配置してください</div>
