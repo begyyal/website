@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { selectById } from 'constant/shogi/player';
+import { selectByIndex } from 'constant/shogi/koma';
+import { MasuState } from 'model/shogi/masu-state';
 
 @Component({
   selector: 'by-palette',
@@ -9,19 +12,30 @@ export class PaletteComponent implements OnInit {
 
   @Input() rh: number;
   @Input() player: string;
-  images: (string | null)[];
+  states: MasuState[];
   masu_ids = [...Array(81)].map((_, i) => "masu_" + i);
 
   constructor() {
   }
 
   ngOnInit() {
-    this.images = this.createImagePaths(this.player);
+    this.states = this.createMasuStates(this.player);
   }
 
-  private createImagePaths(player: string) {
+  private createMasuStates(playerId: string) {
     return [...Array(16)]
-      .map((_, i) => i == 8 || i == 11 ? null : "assets/koma/" + player + "/" + i + ".png");
+      .map((_, i) => {
+        if (i == 8 || i == 11)
+          return null;
+        const p = selectById(playerId);
+        return {
+          player: p,
+          koma: selectByIndex(i),
+          suzi: -1,
+          dan: -1,
+          imagePath: "assets/koma/" + p.desc1 + "/" + i + ".png"
+        };
+      });
   }
 
   returnFalse() {

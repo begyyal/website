@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MasuState } from 'model/shogi/masu-state';
 
 const RH_MIN = 45, RH_MAX = 70;
 
@@ -9,8 +10,8 @@ const RH_MIN = 45, RH_MAX = 70;
 })
 export class ShogiComponent implements OnInit {
 
-  matrix = [...Array(81)].map((_, i) => [""]);
-  rh = 0;
+  matrix: MasuState[] = [...Array(81)].map((_, i) => null);
+  rh: number;
 
   constructor() {
   }
@@ -29,6 +30,6 @@ export class ShogiComponent implements OnInit {
   }
 
   reset() {
-    this.matrix = [...Array(81)].map((_, i) => [""]);
+    this.matrix = [...Array(81)].map((_, i) => null);
   }
 }

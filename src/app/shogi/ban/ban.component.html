@@ -3,11 +3,10 @@
         <mat-grid-tile
             cdkDropList
             id="masu_{{i}}"
-            [cdkDropListData]="matrix[i]"
-            (cdkDropListDropped)="drop($event)"
+            (cdkDropListDropped)="drop($event, i)"
             (dblclick)="remove(i)">
-            <img *ngIf="matrix[i][0]" 
-                [src]="matrix[i][0]" 
+            <img *ngIf="matrix[i]" 
+                [src]="matrix[i].imagePath" 
                 [width]="rh*0.86" 
                 [height]="rh">
         </mat-grid-tile>
