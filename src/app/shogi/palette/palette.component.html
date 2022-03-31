@@ -1,0 +1,33 @@
+<div>※盤上にドラッグ&ドロップして配置してください</div>
+<mat-grid-list 
+    class="gote_koma_palette" 
+    cols="8" 
+    rowHeight="{{rh}}"
+    cdkDropList
+    [cdkDropListData]="gote_images"
+    [cdkDropListConnectedTo]="masu_ids">
+    <mat-grid-tile *ngFor="let p of gote_images">
+        <img *ngIf="p" 
+            [src]="p" 
+            [width]="rh*0.86" 
+            [height]="rh" 
+            [cdkDragData]="p" 
+            cdkDrag>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list 
+    class="sente_koma_palette" 
+    cols="8" 
+    rowHeight="{{rh}}"
+    cdkDropList
+    [cdkDropListData]="sente_images"
+    [cdkDropListConnectedTo]="masu_ids">
+    <mat-grid-tile *ngFor="let p of sente_images">
+        <img *ngIf="p" 
+            [src]="p" 
+            [width]="rh*0.86" 
+            [height]="rh" 
+            [cdkDragData]="p" 
+            cdkDrag>
+    </mat-grid-tile>
+</mat-grid-list>

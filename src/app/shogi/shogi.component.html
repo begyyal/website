@@ -1,2 +1,17 @@
 <h1>Tumeshogi Solver</h1>
-<by-ban></by-ban>
+<div class="ban-contents" (window:resize)="onResize($event)">
+    <div class="ban-col1">
+        <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
+        <by-mtgm></by-mtgm>
+    </div>
+    <div class="ban-col2">
+        <by-palette [rh]="rh"></by-palette>
+        <div class="control_and_display">
+            <div class="button_contents">
+                <button mat-stroked-button>計算する</button>
+                <button mat-stroked-button (click)="reset()">リセット</button>
+            </div>
+            <by-result-display class="result-display"></by-result-display>
+        </div>
+    </div>
+</div>

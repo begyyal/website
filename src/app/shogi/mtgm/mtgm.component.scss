@@ -1,0 +1,33 @@
+:host {
+    position: relative;
+    top: 20px;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+mat-select {
+    text-align: center;
+}
+
+.mtgm_label {
+    float: left;
+    width: 12.5%;
+    text-align: center;
+    position: relative;
+    top: 8px;
+    font-size: 18px;
+}
+
+.mtgm_sente {
+    position: relative;
+    top: 15px;
+}
+
+.mtgm_contents {
+    float: left;
+    width: 87.5%;
+    color: black;
+    font-weight: 800;
+}

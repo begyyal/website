@@ -2,3 +2,47 @@ h1 {
     margin: 30px;
     font-size: 40px;
 }
+
+:host{
+    margin: 30px;
+    width: 90%;
+    display: block;
+}
+
+.ban-col1 {
+    float: left;
+    width: 50%;
+    min-width: 405px;
+    max-width: 630px;
+}
+
+.ban-col2 {
+    float: left;
+    width: 40%;
+    min-width: 324px;
+    max-width: 504px;
+    margin-top: 0px;
+    margin-left: 30px;
+}
+
+.control_and_display {
+    position: relative;
+    top: 30px;
+}
+
+.button_contents {
+    button {
+        font-weight: 800;
+        width: 90%;
+        min-height: 30px;
+        margin-top: 10px;
+    }
+    float: left;
+    width: 20%;
+    position: relative;
+}
+
+.result-display {
+    float: left;
+    width: 80%;
+}
