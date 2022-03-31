@@ -2,9 +2,9 @@
     cols="8" 
     rowHeight="{{rh}}"
     cdkDropList
-    [cdkDropListData]="images"
     [cdkDropListConnectedTo]="masu_ids"
-    [cdkDropListEnterPredicate]="returnFalse">
+    [cdkDropListEnterPredicate]="returnFalse"
+    [cdkDropListSortPredicate]="returnFalse">
     <mat-grid-tile *ngFor="let p of images">
         <img *ngIf="p" 
             [src]="p" 
