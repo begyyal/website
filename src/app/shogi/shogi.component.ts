@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { MasuState } from 'model/shogi/masu-state';
+import { DispMasuState } from 'model/shogi/masu-state';
 import { Motigoma } from 'model/shogi/motigoma';
 import { Koma } from 'constant/shogi/koma';
 import { Player } from 'constant/shogi/player';
+import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
 
 const RH_MIN = 45, RH_MAX = 70;
 
 @Component({
   selector: 'by-shogi',
   templateUrl: './shogi.component.html',
-  styleUrls: ['./shogi.component.scss']
+  styleUrls: ['./shogi.component.scss'],
+  providers: [TsSolver],
 })
 export class ShogiComponent implements OnInit {
 
-  matrix: MasuState[] = [...Array(81)].map((_, i) => null);
+  tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+  matrix: DispMasuState[] = [...Array(81)].map((_, i) => null);
   senteMtgm: Motigoma[];
   goteMtgm: Motigoma[];
+  tesuu: number;
   rh: number;
 
-  constructor() {
+  constructor(private solver: TsSolver) {
   }
 
   ngOnInit() {
+    this.tesuu = 1;
     this.rh = this.calcRh(window.innerWidth);
     this.senteMtgm = this.createMotigoma(Player.Sente);
     this.goteMtgm = this.createMotigoma(Player.Gote);
@@ -50,9 +55,18 @@ export class ShogiComponent implements OnInit {
     this.matrix = [...Array(81)].map((_, i) => null);
   }
 
-  calc(){
-    console.log(this.senteMtgm);
-    console.log(this.goteMtgm);
-    console.log(this.matrix);
+  calc() {
+    this.solver.calculate(
+      this.matrix,
+      this.senteMtgm,
+      this.goteMtgm,
+      this.tesuu).subscribe({
+        next: (r: CalcResult) => {
+          console.log(r.result);
+        },
+        error: (e: Error) => {
+          console.error(e);
+        }
+     });;
   }
 }

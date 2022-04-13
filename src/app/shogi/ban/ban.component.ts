@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
-import { MasuState } from 'model/shogi/masu-state';
+import { DispMasuState } from 'model/shogi/masu-state';
 
 @Component({
   selector: 'by-ban',
@@ -9,13 +9,13 @@ import { MasuState } from 'model/shogi/masu-state';
 })
 export class BanComponent {
 
-  @Input() matrix: MasuState[];
+  @Input() matrix: DispMasuState[];
   @Input() rh: number;
 
   constructor() {
   }
 
-  drop(event: CdkDragDrop<MasuState[], MasuState[], MasuState>, index: number) {
+  drop(event: CdkDragDrop<DispMasuState[], DispMasuState[], DispMasuState>, index: number) {
     let clone = { ...event.item.data };
     clone.suzi = 9 - index % 9;
     clone.dan = Math.floor(index / 9) + 1;

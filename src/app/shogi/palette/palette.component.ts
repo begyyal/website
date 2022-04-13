@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { selectById } from 'constant/shogi/player';
 import { selectByIndex } from 'constant/shogi/koma';
-import { MasuState } from 'model/shogi/masu-state';
+import { DispMasuState } from 'model/shogi/masu-state';
 
 @Component({
   selector: 'by-palette',
@@ -12,7 +12,7 @@ export class PaletteComponent implements OnInit {
 
   @Input() rh: number;
   @Input() player: string;
-  states: MasuState[];
+  states: DispMasuState[];
   masu_ids = [...Array(81)].map((_, i) => "masu_" + i);
 
   constructor() {

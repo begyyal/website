@@ -9,6 +9,11 @@ h1 {
     display: block;
 }
 
+mat-select {
+    text-align: center;
+    background: lightblue;
+}
+
 .ban-col1 {
     float: left;
     width: 50%;
@@ -25,27 +30,52 @@ h1 {
     margin-left: 30px;
 }
 
-.mtgm_gote {
+.mtgm-gote {
     position: relative;
     top: 30px;
 }
 
-.gote_koma_palette {
+.gote-koma-palette {
     position: relative;
     top: 10px;
 }
 
-.sente_koma_palette {
+.sente-koma-palette {
     position: relative;
     top: 20px;
 }
 
-.control_and_display {
+.control-and-display {
     position: relative;
     top: 35px;
 }
 
-.button_contents {
+.control {
+    mat-select {
+        font-weight: 800;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .tesuu-label {
+        float: left;
+        position: relative;
+        font-size: 18px;
+        width: 90%;
+        margin-top: 5px;
+        min-height: 30px;
+    }
+    .tesuu {
+        border: solid;
+        border-color: black;
+        position: relative;
+        display: table;
+        background: lightblue;
+        min-height: 30px;
+        width: 85%;
+    }
+    .button {
+        margin-top: 15px;
+    }
     button {
         font-weight: 800;
         width: 90%;

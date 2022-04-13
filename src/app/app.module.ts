@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ShogiModule } from './shogi/shogi.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ShogiModule } from './shogi/shogi.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSidenavModule,
     ShogiModule
   ],

@@ -2,18 +2,28 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
     <div class="ban-col1">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
-        <by-mtgm class="mtgm_sente" [playerId]="'x'" [mtgm]="senteMtgm"></by-mtgm>
-        <by-mtgm class="mtgm_gote" [playerId]="'y'" [mtgm]="goteMtgm"></by-mtgm>
+        <by-mtgm class="mtgm-sente" [playerId]="'x'" [mtgm]="senteMtgm"></by-mtgm>
+        <by-mtgm class="mtgm-gote" [playerId]="'y'" [mtgm]="goteMtgm"></by-mtgm>
     </div>
     <div class="ban-col2">
         <div>※盤上にドラッグ&ドロップして配置してください</div>
         <div>※盤上の駒はダブルクリックで消えます</div>
-        <by-palette class="gote_koma_palette" [rh]="rh" [player]="'y'"></by-palette>
-        <by-palette class="sente_koma_palette" [rh]="rh" [player]="'x'"></by-palette>
-        <div class="control_and_display">
-            <div class="button_contents">
-                <button mat-stroked-button (click)="calc()">計算する</button>
-                <button mat-stroked-button (click)="reset()">リセット</button>
+        <by-palette class="gote-koma-palette" [rh]="rh" [player]="'y'"></by-palette>
+        <by-palette class="sente-koma-palette" [rh]="rh" [player]="'x'"></by-palette>
+        <div class="control-and-display">
+            <div class="control">
+                <div class="tesuu-label">手数</div>
+                <div class="tesuu">
+                    <mat-select [(value)]="tesuu">
+                        <mat-option *ngFor="let v of tesuu_op_values" [value]="v">
+                            {{v}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="button">
+                    <button mat-stroked-button (click)="calc()">計算する</button>
+                    <button mat-stroked-button (click)="reset()">リセット</button>
+                </div>
             </div>
             <by-result-display class="result-display"></by-result-display>
         </div>
