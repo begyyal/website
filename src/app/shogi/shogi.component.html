@@ -2,8 +2,18 @@
 <div class="ban-contents" (window:resize)="onResize($event)">
     <div class="ban-col1">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
-        <by-mtgm class="mtgm-sente" [playerId]="'x'" [mtgm]="senteMtgm"></by-mtgm>
-        <by-mtgm class="mtgm-gote" [playerId]="'y'" [mtgm]="goteMtgm"></by-mtgm>
+        <by-mtgm 
+            class="mtgm-sente" 
+            [playerId]="'x'" 
+            [mtgm]="senteMtgm" 
+            (emChange)="truncateMtgm(true, $event)">
+        </by-mtgm>
+        <by-mtgm 
+            class="mtgm-gote"
+            [playerId]="'y'" 
+            [mtgm]="goteMtgm"
+            (emChange)="truncateMtgm(false, $event)">
+        </by-mtgm>
     </div>
     <div class="ban-col2">
         <div>※盤上にドラッグ&ドロップして配置してください</div>

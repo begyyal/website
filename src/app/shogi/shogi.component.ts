@@ -22,11 +22,11 @@ export class ShogiComponent implements OnInit {
   tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
   rh: number;
 
-  matrix: DispMasuState[] = [...Array(81)].map((_, i) => null);
+  matrix: DispMasuState[];
   senteMtgm: Motigoma[];
   goteMtgm: Motigoma[];
   nom: number;
-  result: KihuRecord[] = [];
+  result: KihuRecord[];
 
   constructor(private solver: TsSolver, private sm: SessionManager) {
 
@@ -44,10 +44,8 @@ export class ShogiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nom = 1;
     this.rh = this.calcRh(window.innerWidth);
-    this.senteMtgm = this.createMotigoma(Player.Sente);
-    this.goteMtgm = this.createMotigoma(Player.Gote);
+    this.reset();
   }
 
   private createMotigoma(player: Player) {
@@ -71,6 +69,10 @@ export class ShogiComponent implements OnInit {
 
   reset() {
     this.matrix = [...Array(81)].map((_, i) => null);
+    this.nom = 1;
+    this.senteMtgm = this.createMotigoma(Player.Sente);
+    this.goteMtgm = this.createMotigoma(Player.Gote);
+    this.result = [];
   }
 
   calc() {
@@ -104,5 +106,12 @@ export class ShogiComponent implements OnInit {
         opt: r.opt == null ? null : selectOpt(r.opt)
       }
     });
+  }
+
+  truncateMtgm(sente: boolean, event: Motigoma) {
+    const mtgm = sente ? this.goteMtgm : this.senteMtgm;
+    const target = mtgm.find(m => m.koma.key == event.koma.key);
+    if (target.value + event.value > event.koma.limit)
+      target.value = event.koma.limit - event.value;
   }
 }

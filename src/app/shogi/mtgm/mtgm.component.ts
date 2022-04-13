@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { selectById, Player } from 'constant/shogi/player';
-import { Koma } from 'constant/shogi/koma';
 import { Motigoma } from 'model/shogi/motigoma';
 
 @Component({
@@ -10,13 +9,13 @@ import { Motigoma } from 'model/shogi/motigoma';
 })
 export class MtgmComponent implements OnInit {
 
-  @Input()
-  mtgm: Motigoma[];
+  @Input() mtgm: Motigoma[];
   opValues: number[][];
-
   @Input() playerId: string;
   mtgm_tile_count = [...Array(7)].map((_, i) => i);
   player: Player;
+  @Output() emChange = new EventEmitter<Motigoma>();
+
 
   constructor() {
   }
@@ -28,5 +27,9 @@ export class MtgmComponent implements OnInit {
 
   getMtgmLabel(idx: number) {
     return this.mtgm[idx].koma.desc;
+  }
+
+  onChange(mtgmRec: Motigoma) {
+    this.emChange.emit(mtgmRec);
   }
 }

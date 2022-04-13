@@ -43,7 +43,7 @@ export class TsSolver {
                 return {
                     player: m.player.id,
                     koma: {
-                        id: m.koma.id,
+                        key: m.koma.key,
                         nari: m.koma.nari
                     },
                     suzi: m.suzi,
@@ -55,7 +55,7 @@ export class TsSolver {
     private convertMtgm(mtgm: Motigoma[]) {
         return mtgm.map(m => {
             return {
-                id: m.koma.id,
+                key: m.koma.key,
                 num: m.value
             }
         });

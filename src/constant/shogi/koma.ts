@@ -1,97 +1,97 @@
 export const Koma = {
     Hu: {
-        id: "a",
+        key: "a",
         nari: false,
         index: 7,
         limit: 18,
         desc: "歩"
     },
     Tokin: {
-        id: "a",
+        key: "a",
         nari: true,
         index: 15,
         limit: 18,
         desc: "と"
     },
     Kyousya: {
-        id: "b",
+        key: "b",
         nari: false,
         index: 6,
         limit: 4,
         desc: "香"
     },
     NariKyou: {
-        id: "b",
+        key: "b",
         nari: true,
         index: 14,
         limit: 4,
         desc: "成香"
     },
     Keima: {
-        id: "c",
+        key: "c",
         nari: false,
         index: 5,
         limit: 4,
         desc: "桂"
     },
     NariKei: {
-        id: "c",
+        key: "c",
         nari: true,
         index: 13,
         limit: 4,
         desc: "成桂"
     },
     Gin: {
-        id: "d",
+        key: "d",
         nari: false,
         index: 4,
         limit: 4,
         desc: "銀"
     },
     NariGin: {
-        id: "d",
+        key: "d",
         nari: true,
         index: 12,
         limit: 4,
         desc: "成銀"
     },
     Kin: {
-        id: "e",
+        key: "e",
         nari: false,
         index: 3,
         limit: 4,
         desc: "金"
     },
     Kaku: {
-        id: "f",
+        key: "f",
         nari: false,
         index: 2,
         limit: 2,
         desc: "角"
     },
     Uma: {
-        id: "f",
+        key: "f",
         nari: true,
         index: 10,
         limit: 2,
         desc: "馬"
     },
     Hisya: {
-        id: "g",
+        key: "g",
         nari: false,
         index: 1,
         limit: 2,
         desc: "飛"
     },
     Ryuu: {
-        id: "g",
+        key: "g",
         nari: true,
         index: 9,
         limit: 2,
         desc: "龍"
     },
     Ou: {
-        id: "h",
+        key: "h",
         nari: false,
         index: 0,
         limit: 2,
@@ -103,12 +103,12 @@ export function selectByIndex(index: number) {
     return Object.values(Koma).find(k => k.index == index);
 }
 
-export function select(id: string, nari: boolean) {
-    return Object.values(Koma).find(k => k.id == id);
+export function select(key: string, nari: boolean) {
+    return Object.values(Koma).find(k => k.key == key && k.nari == nari);
 }
 
 export interface Koma {
-    id: string
+    key: string
     nari: boolean
     index: number
     limit: number
