@@ -23,6 +23,9 @@ export class SessionManager {
     }
 
     registRetoreSetting(key: string, setValue: (v: string) => void) {
-        this.restoreSettings.push(() => setValue(sessionStorage.getItem(key)));
+        this.restoreSettings.push(() => {
+            if(sessionStorage.getItem(key) != null)
+                setValue(sessionStorage.getItem(key));
+        });
     }
 }
