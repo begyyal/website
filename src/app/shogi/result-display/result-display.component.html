@@ -1,6 +1,9 @@
 <mat-card class="">
     <mat-card-title>計算結果</mat-card-title>
     <mat-card-content>
-        <div *ngFor="let r of result">{{summarize(r)}}</div>
+        <div *ngFor="let r of result">
+            <label class="player">{{r.player.desc2}}</label>
+            <label>{{summarize(r)}}</label>
+        </div>
     </mat-card-content>
 </mat-card>

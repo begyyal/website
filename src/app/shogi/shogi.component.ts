@@ -4,6 +4,7 @@ import { Motigoma } from 'model/shogi/motigoma';
 import { Koma, select as selectKoma } from 'constant/shogi/koma';
 import { Player, selectById as selectPlayer } from 'constant/shogi/player';
 import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
+import { SessionManager } from 'service/session-manager';
 import { KihuRecord } from 'model/shogi/kihu-record'
 import { selectById as selectAct } from 'constant/shogi/kihu-act';
 import { selectById as selectRel } from 'constant/shogi/kihu-rel';
@@ -14,24 +15,36 @@ const RH_MIN = 45, RH_MAX = 70;
 @Component({
   selector: 'by-shogi',
   templateUrl: './shogi.component.html',
-  styleUrls: ['./shogi.component.scss'],
-  providers: [TsSolver],
+  styleUrls: ['./shogi.component.scss']
 })
 export class ShogiComponent implements OnInit {
 
   tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+  rh: number;
+
   matrix: DispMasuState[] = [...Array(81)].map((_, i) => null);
   senteMtgm: Motigoma[];
   goteMtgm: Motigoma[];
-  tesuu: number;
-  result: KihuRecord[];
-  rh: number;
+  nom: number;
+  result: KihuRecord[] = [];
 
-  constructor(private solver: TsSolver) {
+  constructor(private solver: TsSolver, private sm: SessionManager) {
+
+    this.sm.registStoreSetting("tss.matrix", () => JSON.stringify(this.matrix));
+    this.sm.registStoreSetting("tss.senteMtgm", () => JSON.stringify(this.senteMtgm));
+    this.sm.registStoreSetting("tss.goteMtgm", () => JSON.stringify(this.goteMtgm));
+    this.sm.registStoreSetting("tss.nom", () => this.nom.toString());
+    this.sm.registStoreSetting("tss.result", () => JSON.stringify(this.result));
+
+    this.sm.registRetoreSetting("tss.matrix", (v) => this.matrix = JSON.parse(v));
+    this.sm.registRetoreSetting("tss.senteMtgm", (v) => this.senteMtgm = JSON.parse(v));
+    this.sm.registRetoreSetting("tss.goteMtgm", (v) => this.goteMtgm = JSON.parse(v));
+    this.sm.registRetoreSetting("tss.nom", (v) => this.nom = Number.parseInt(v));
+    this.sm.registRetoreSetting("tss.result", (v) => this.result = JSON.parse(v));
   }
 
   ngOnInit() {
-    this.tesuu = 1;
+    this.nom = 1;
     this.rh = this.calcRh(window.innerWidth);
     this.senteMtgm = this.createMotigoma(Player.Sente);
     this.goteMtgm = this.createMotigoma(Player.Gote);
@@ -65,7 +78,7 @@ export class ShogiComponent implements OnInit {
       this.matrix,
       this.senteMtgm,
       this.goteMtgm,
-      this.tesuu).subscribe({
+      this.nom).subscribe({
         next: (r: CalcResult) => {
           console.log(r.result);
           this.result = this.mapping(r.result);

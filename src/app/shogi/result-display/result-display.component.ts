@@ -15,13 +15,13 @@ export class ResultDisplayComponent {
   }
 
   summarize(rec: KihuRecord) {
-    let disp = rec.player.desc2;
-    disp += " - ";
+    let disp = "";
     if (!rec.dou) {
       disp += String.fromCharCode(rec.suzi.toString().charCodeAt(0) + 0xFEE0);
       disp += String.fromCharCode(rec.dan.toString().charCodeAt(0) + 0xFEE0);
     } else
-      disp += rec.koma.desc;
+      disp += "同";
+    disp += rec.koma.desc;
     if (rec.rel != null)
       disp += rec.rel.desc;
     if (rec.act != null)

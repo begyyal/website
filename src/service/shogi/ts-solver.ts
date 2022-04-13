@@ -7,7 +7,9 @@ import { catchError, retry } from 'rxjs/operators';
 
 const calc_url = "http://localhost:8080/tss/exe";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class TsSolver {
     constructor(private http: HttpClient) {
     }

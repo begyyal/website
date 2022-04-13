@@ -1,3 +1,7 @@
-<by-sidebar>
-    <router-outlet></router-outlet>
-</by-sidebar>
+<div 
+    (window:beforeunload)="sm.onBeforeUnload($event)"
+    (window:load)="sm.onLoad($event)">
+    <by-sidebar>
+        <router-outlet></router-outlet>
+    </by-sidebar>
+</div>
