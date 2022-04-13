@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DispMasuState } from 'model/shogi/masu-state';
 import { Motigoma } from 'model/shogi/motigoma';
-import { Koma } from 'constant/shogi/koma';
-import { Player } from 'constant/shogi/player';
+import { Koma, select as selectKoma } from 'constant/shogi/koma';
+import { Player, selectById as selectPlayer } from 'constant/shogi/player';
 import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
+import { KihuRecord } from 'model/shogi/kihu-record'
+import { selectById as selectAct } from 'constant/shogi/kihu-act';
+import { selectById as selectRel } from 'constant/shogi/kihu-rel';
+import { selectById as selectOpt } from 'constant/shogi/kihu-opt';
 
 const RH_MIN = 45, RH_MAX = 70;
 
@@ -20,6 +24,7 @@ export class ShogiComponent implements OnInit {
   senteMtgm: Motigoma[];
   goteMtgm: Motigoma[];
   tesuu: number;
+  result: KihuRecord[];
   rh: number;
 
   constructor(private solver: TsSolver) {
@@ -63,10 +68,28 @@ export class ShogiComponent implements OnInit {
       this.tesuu).subscribe({
         next: (r: CalcResult) => {
           console.log(r.result);
+          this.result = this.mapping(r.result);
         },
         error: (e: Error) => {
           console.error(e);
         }
-     });;
+      });
+  }
+
+  private mapping(res: any[]): KihuRecord[] {
+    return res.map(r => {
+      return {
+        player: selectPlayer(r.player),
+        fromSuzi: r.fromSuzi,
+        fromDan: r.fromDan,
+        suzi: r.suzi,
+        dan: r.dan,
+        dou: r.dou,
+        koma: selectKoma(r.koma, r.koma.nari),
+        rel: r.rel == null ? null : selectRel(r.rel),
+        act: r.act == null ? null : selectAct(r.act),
+        opt: r.opt == null ? null : selectOpt(r.opt)
+      }
+    });
   }
 }

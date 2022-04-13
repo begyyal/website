@@ -1,12 +1,6 @@
 <mat-card class="">
     <mat-card-title>計算結果</mat-card-title>
     <mat-card-content>
-        先手：２２飛<br>
-        後手：１４玉<br>
-        先手：２３飛成<br>
-        後手：同玉<br>
-        先手：３３角成<br>
-        後手：同玉<br>
-        先手：３４金
+        <div *ngFor="let r of result">{{summarize(r)}}</div>
     </mat-card-content>
 </mat-card>

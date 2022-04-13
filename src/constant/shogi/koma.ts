@@ -103,6 +103,10 @@ export function selectByIndex(index: number) {
     return Object.values(Koma).find(k => k.index == index);
 }
 
+export function select(id: string, nari: boolean) {
+    return Object.values(Koma).find(k => k.id == id);
+}
+
 export interface Koma {
     id: string
     nari: boolean
