@@ -1,38 +1,40 @@
 <h1>Tumeshogi Solver</h1>
 <div (window:resize)="onResize($event)"></div>
-<div class="row1">
-    <div class="col1" [style.height.px]="rh*9+10">
+<div class="row1" [style.height.px]="rh*9+10">
+    <div class="col1">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
     </div>
-    <div class="col2" [style.height.px]="rh*9+10">
-        <div class="col2row1">
+    <div class="col2">
+        <div class="r1c2r1">
             <div>※盤上にドラッグ&ドロップして配置してください</div>
             <div>※盤上の駒はダブルクリックで消えます</div>
         </div>
-        <div class="col2row2">
+        <div class="r1c2r2">
             <by-palette class="gote-koma-palette" [rh]="rh" [player]="'y'"></by-palette>
             <by-palette class="sente-koma-palette" [rh]="rh" [player]="'x'"></by-palette>
         </div>
-        <div class="col2row3">
+        <div class="r1c2r3">
             <div class="control">
-                <div class="tesuu-label">手数</div>
-                <div class="tesuu">
-                    <mat-select [(value)]="nom">
-                        <mat-option *ngFor="let v of tesuu_op_values" [value]="v">
-                            {{v}}
-                        </mat-option>
-                    </mat-select>
+                <div class="nom">
+                    <div class="label">手数</div>
+                    <div class="select">
+                        <mat-select [(value)]="nom">
+                            <mat-option *ngFor="let v of tesuu_op_values" [value]="v">
+                                {{v}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </div>
                 <div class="button">
-                    <button mat-stroked-button (click)="calc()">計算する</button>
-                    <button mat-stroked-button (click)="reset()">リセット</button>
+                    <button mat-raised-button (click)="calc()">計算する</button>
+                    <button mat-raised-button (click)="reset()">リセット</button>
                 </div>
             </div>
             <by-result-display class="result-display" [result]="result" [rh]="rh"></by-result-display>
         </div>
     </div>
 </div>
-<div class="row2">
+<div class="row2" [style.min-height.px]="175">
     <div class="col1">
         <by-mtgm 
             class="mtgm-sente" 
@@ -48,5 +50,14 @@
         </by-mtgm>
     </div>
     <div class="col2">
+        <div class="r2c2r1">
+            <div>※保存先はローカルストレージです</div>
+        </div>
+        <div class="r2c2r2">
+            <by-save-input ></by-save-input>
+        </div>
     </div>
 </div>  
+<div class="row3">
+    <by-save-history></by-save-history>
+</div>

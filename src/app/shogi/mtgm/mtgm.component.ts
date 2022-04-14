@@ -16,7 +16,6 @@ export class MtgmComponent implements OnInit {
   player: Player;
   @Output() emChange = new EventEmitter<Motigoma>();
 
-
   constructor() {
   }
 
