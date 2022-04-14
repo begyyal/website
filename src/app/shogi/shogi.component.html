@@ -1,26 +1,19 @@
 <h1>Tumeshogi Solver</h1>
-<div class="ban-contents" (window:resize)="onResize($event)">
-    <div class="ban-col1">
+<div (window:resize)="onResize($event)"></div>
+<div class="row1">
+    <div class="col1" [style.height.px]="rh*9+10">
         <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
-        <by-mtgm 
-            class="mtgm-sente" 
-            [playerId]="'x'" 
-            [mtgm]="senteMtgm" 
-            (emChange)="truncateMtgm(true, $event)">
-        </by-mtgm>
-        <by-mtgm 
-            class="mtgm-gote"
-            [playerId]="'y'" 
-            [mtgm]="goteMtgm"
-            (emChange)="truncateMtgm(false, $event)">
-        </by-mtgm>
     </div>
-    <div class="ban-col2">
-        <div>※盤上にドラッグ&ドロップして配置してください</div>
-        <div>※盤上の駒はダブルクリックで消えます</div>
-        <by-palette class="gote-koma-palette" [rh]="rh" [player]="'y'"></by-palette>
-        <by-palette class="sente-koma-palette" [rh]="rh" [player]="'x'"></by-palette>
-        <div class="control-and-display">
+    <div class="col2" [style.height.px]="rh*9+10">
+        <div class="col2row1">
+            <div>※盤上にドラッグ&ドロップして配置してください</div>
+            <div>※盤上の駒はダブルクリックで消えます</div>
+        </div>
+        <div class="col2row2">
+            <by-palette class="gote-koma-palette" [rh]="rh" [player]="'y'"></by-palette>
+            <by-palette class="sente-koma-palette" [rh]="rh" [player]="'x'"></by-palette>
+        </div>
+        <div class="col2row3">
             <div class="control">
                 <div class="tesuu-label">手数</div>
                 <div class="tesuu">
@@ -35,7 +28,25 @@
                     <button mat-stroked-button (click)="reset()">リセット</button>
                 </div>
             </div>
-            <by-result-display class="result-display" [result]="result"></by-result-display>
+            <by-result-display class="result-display" [result]="result" [rh]="rh"></by-result-display>
         </div>
     </div>
 </div>
+<div class="row2">
+    <div class="col1">
+        <by-mtgm 
+            class="mtgm-sente" 
+            [playerId]="'x'" 
+            [mtgm]="senteMtgm" 
+            (emChange)="truncateMtgm(true, $event)">
+        </by-mtgm>
+        <by-mtgm 
+            class="mtgm-gote"
+            [playerId]="'y'" 
+            [mtgm]="goteMtgm"
+            (emChange)="truncateMtgm(false, $event)">
+        </by-mtgm>
+    </div>
+    <div class="col2">
+    </div>
+</div>  

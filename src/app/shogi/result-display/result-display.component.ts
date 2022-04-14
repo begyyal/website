@@ -8,8 +8,8 @@ import { KihuRecord } from 'model/shogi/kihu-record'
 })
 export class ResultDisplayComponent {
 
-  @Input()
-  result: KihuRecord[];
+  @Input() rh: number;
+  @Input() result: KihuRecord[];
 
   constructor() {
   }

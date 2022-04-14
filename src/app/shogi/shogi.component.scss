@@ -9,30 +9,35 @@ h1 {
     display: block;
 }
 
+.row1, .row2 {
+    display: flex;
+}
+
 mat-select {
     text-align: center;
     background: lightblue;
 }
 
-.ban-col1 {
-    float: left;
+.col1 {
     width: 50%;
     min-width: 405px;
     max-width: 630px;
 }
 
-.ban-col2 {
-    float: left;
+.col2 {
     width: 40%;
     min-width: 324px;
     max-width: 504px;
-    margin-top: 0px;
     margin-left: 30px;
 }
 
 .mtgm-gote {
     position: relative;
     top: 30px;
+}
+
+.col2row2 {
+    height: 50%;
 }
 
 .gote-koma-palette {
@@ -45,9 +50,14 @@ mat-select {
     top: 20px;
 }
 
-.control-and-display {
-    position: relative;
-    top: 35px;
+.col2row1 {
+    height: 7%;
+}
+
+.col2row3 {
+    display: flex;
+    width: 100%;
+    height: 45%;
 }
 
 .control {
@@ -82,12 +92,9 @@ mat-select {
         min-height: 30px;
         margin-top: 10px;
     }
-    float: left;
     width: 20%;
-    position: relative;
 }
 
 .result-display {
-    float: left;
     width: 80%;
 }

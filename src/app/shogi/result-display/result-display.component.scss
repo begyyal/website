@@ -1,6 +1,17 @@
 :host {
     color: black;
     font-weight: 800;
+    display: block;
+}
+
+mat-card {
+    height: 84%;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card-content {
+    overflow-y: auto;
 }
 
 label {
