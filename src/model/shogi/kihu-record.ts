@@ -1,10 +1,11 @@
-import { Koma, select as selectKoma } from 'constant/shogi/koma';
-import { Player, selectById as selectPlayer } from 'constant/shogi/player';
-import { KihuAct, selectById as selectAct } from 'constant/shogi/kihu-act';
-import { KihuRel, selectById as selectRel } from 'constant/shogi/kihu-rel';
-import { KihuOpt, selectById as selectOpt } from 'constant/shogi/kihu-opt';
+import { Koma } from 'constant/shogi/koma';
+import { Player } from 'constant/shogi/player';
+import { KihuAct } from 'constant/shogi/kihu-act';
+import { KihuRel } from 'constant/shogi/kihu-rel';
+import { KihuOpt } from 'constant/shogi/kihu-opt';
 
 export interface KihuRecord {
+    failure: boolean;
     player: Player;
     fromSuzi: number;
     fromDan: number;
@@ -16,3 +17,17 @@ export interface KihuRecord {
     act: KihuAct;
     opt: KihuOpt;
 }
+
+export const FAILURE : KihuRecord = {
+    failure : true,
+    player : null,
+    fromSuzi : -2,
+    fromDan : -2,
+    suzi : -1,
+    dan: -1,
+    dou: false,
+    koma: null,
+    rel: null,
+    act: null,
+    opt: null
+};

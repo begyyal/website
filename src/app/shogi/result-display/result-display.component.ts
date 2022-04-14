@@ -14,6 +14,10 @@ export class ResultDisplayComponent {
   constructor() {
   }
 
+  getState() {
+    return this.result.length == 0 ? 0 : !this.result[0].failure ? 1 : 2;
+  }
+
   summarize(rec: KihuRecord) {
     let disp = "";
     if (!rec.dou) {

@@ -1,9 +1,14 @@
 <mat-card class="">
     <mat-card-title>計算結果</mat-card-title>
     <mat-card-content>
-        <div *ngFor="let r of result">
-            <label class="player">{{r.player.desc2}}</label>
-            <label>{{summarize(r)}}</label>
+        <div *ngIf="getState()==1">
+            <div *ngFor="let r of result">
+                <label class="player">{{r.player.desc2}}</label>
+                <label>{{summarize(r)}}</label>
+            </div>
+        </div>
+        <div *ngIf="getState()==2">
+            <label>詰めませんでした。</label>
         </div>
     </mat-card-content>
 </mat-card>
