@@ -1,47 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { DispMasuState } from 'model/shogi/masu-state';
-import { Motigoma } from 'model/shogi/motigoma';
-import { Koma, select as selectKoma } from 'constant/shogi/koma';
-import { Player, selectById as selectPlayer } from 'constant/shogi/player';
+import { Motigoma } from 'model/tss/motigoma';
+import { select as selectKoma } from 'constant/tss/koma';
+import { selectById as selectPlayer } from 'constant/tss/player';
 import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
 import { SessionManager } from 'service/session-manager';
-import { KihuRecord } from 'model/shogi/kihu-record'
-import { selectById as selectAct } from 'constant/shogi/kihu-act';
-import { selectById as selectRel } from 'constant/shogi/kihu-rel';
-import { selectById as selectOpt } from 'constant/shogi/kihu-opt';
+import { KihuRecord } from 'model/tss/kihu-record'
+import { selectById as selectAct } from 'constant/tss/kihu-act';
+import { selectById as selectRel } from 'constant/tss/kihu-rel';
+import { selectById as selectOpt } from 'constant/tss/kihu-opt';
+import { QCondition } from 'model/tss/q-condition';
 
 const RH_MIN = 45, RH_MAX = 70;
 
 @Component({
-  selector: 'by-shogi',
-  templateUrl: './shogi.component.html',
-  styleUrls: ['./shogi.component.scss']
+  selector: 'by-tss',
+  templateUrl: './tss.component.html',
+  styleUrls: ['./tss.component.scss']
 })
-export class ShogiComponent implements OnInit {
+export class TssComponent implements OnInit {
 
   tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
   rh: number;
 
-  matrix: DispMasuState[];
-  senteMtgm: Motigoma[];
-  goteMtgm: Motigoma[];
-  nom: number;
+  cond: QCondition = new QCondition();
   result: KihuRecord[];
   state: number;
 
   constructor(private solver: TsSolver, private sm: SessionManager) {
 
-    this.sm.registStoreSetting("tss.matrix", () => JSON.stringify(this.matrix));
-    this.sm.registStoreSetting("tss.senteMtgm", () => JSON.stringify(this.senteMtgm));
-    this.sm.registStoreSetting("tss.goteMtgm", () => JSON.stringify(this.goteMtgm));
-    this.sm.registStoreSetting("tss.nom", () => this.nom.toString());
+    this.sm.registStoreSetting("tss.cond", () => JSON.stringify(this.cond));
     this.sm.registStoreSetting("tss.result", () => JSON.stringify(this.result));
     this.sm.registStoreSetting("tss.state", () => this.state.toString());
 
-    this.sm.registRetoreSetting("tss.matrix", (v) => this.matrix = JSON.parse(v));
-    this.sm.registRetoreSetting("tss.senteMtgm", (v) => this.senteMtgm = JSON.parse(v));
-    this.sm.registRetoreSetting("tss.goteMtgm", (v) => this.goteMtgm = JSON.parse(v));
-    this.sm.registRetoreSetting("tss.nom", (v) => this.nom = Number.parseInt(v));
+    this.sm.registRetoreSetting("tss.cond", (v) => this.cond = JSON.parse(v));
     this.sm.registRetoreSetting("tss.result", (v) => this.result = JSON.parse(v));
     this.sm.registRetoreSetting("tss.state", (v) => this.state = Number.parseInt(v));
   }
@@ -49,16 +40,6 @@ export class ShogiComponent implements OnInit {
   ngOnInit() {
     this.rh = this.calcRh(window.innerWidth);
     this.reset();
-  }
-
-  private createMotigoma(player: Player) {
-    return [Koma.Hisya, Koma.Kaku, Koma.Kin, Koma.Gin, Koma.Keima, Koma.Kyousya, Koma.Hu]
-      .map(k => {
-        return {
-          koma: k,
-          value: player == Player.Gote ? k.limit : 0
-        }
-      });
   }
 
   onResize(event: any) {
@@ -71,20 +52,14 @@ export class ShogiComponent implements OnInit {
   }
 
   reset() {
-    this.matrix = [...Array(81)].map((_, i) => null);
-    this.nom = 1;
-    this.senteMtgm = this.createMotigoma(Player.Sente);
-    this.goteMtgm = this.createMotigoma(Player.Gote);
+    this.cond.reset();
     this.result = [];
     this.state = 0;
   }
 
   calc() {
-    this.solver.calculate(
-      this.matrix,
-      this.senteMtgm,
-      this.goteMtgm,
-      this.nom).subscribe({
+    this.solver.calculate(this.cond)
+      .subscribe({
         next: (r: CalcResult) => {
           if (r.result.length != 0) {
             this.result = this.mapping(r.result);
@@ -116,7 +91,7 @@ export class ShogiComponent implements OnInit {
   }
 
   truncateMtgm(sente: boolean, event: Motigoma) {
-    const mtgm = sente ? this.goteMtgm : this.senteMtgm;
+    const mtgm = sente ? this.cond.goteMtgm : this.cond.senteMtgm;
     const target = mtgm.find(m => m.koma.key == event.koma.key);
     if (target.value + event.value > event.koma.limit)
       target.value = event.koma.limit - event.value;

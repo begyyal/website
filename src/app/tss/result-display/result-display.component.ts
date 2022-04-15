@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KihuRecord } from 'model/shogi/kihu-record'
+import { KihuRecord } from 'model/tss/kihu-record'
 
 @Component({
   selector: 'by-result-display',

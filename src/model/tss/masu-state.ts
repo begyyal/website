@@ -1,5 +1,5 @@
-import { Koma } from 'constant/shogi/koma';
-import { Player } from 'constant/shogi/player';
+import { Koma } from 'constant/tss/koma';
+import { Player } from 'constant/tss/player';
 
 export interface DispMasuState extends MasuState {
     imagePath: string;

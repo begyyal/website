@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { selectById } from 'constant/shogi/player';
-import { selectByIndex } from 'constant/shogi/koma';
-import { DispMasuState } from 'model/shogi/masu-state';
+import { selectById } from 'constant/tss/player';
+import { selectByIndex } from 'constant/tss/koma';
+import { DispMasuState } from 'model/tss/masu-state';
 
 @Component({
   selector: 'by-palette',

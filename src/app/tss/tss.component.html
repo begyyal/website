@@ -2,7 +2,7 @@
 <div (window:resize)="onResize($event)"></div>
 <div class="row1" [style.height.px]="rh*9+10">
     <div class="col1">
-        <by-ban [matrix]="matrix" [rh]="rh"></by-ban>
+        <by-ban [matrix]="cond.matrix" [rh]="rh"></by-ban>
     </div>
     <div class="col2">
         <div class="r1c2r1">
@@ -18,7 +18,7 @@
                 <div class="nom">
                     <div class="label">手数</div>
                     <div class="select">
-                        <mat-select [(value)]="nom">
+                        <mat-select [(value)]="cond.nom">
                             <mat-option *ngFor="let v of tesuu_op_values" [value]="v">
                                 {{v}}
                             </mat-option>
@@ -44,13 +44,13 @@
         <by-mtgm 
             class="mtgm-sente" 
             [playerId]="'x'" 
-            [mtgm]="senteMtgm" 
+            [mtgm]="cond.senteMtgm" 
             (emChange)="truncateMtgm(true, $event)">
         </by-mtgm>
         <by-mtgm 
             class="mtgm-gote"
             [playerId]="'y'" 
-            [mtgm]="goteMtgm"
+            [mtgm]="cond.goteMtgm"
             (emChange)="truncateMtgm(false, $event)">
         </by-mtgm>
     </div>
@@ -60,7 +60,7 @@
             <div>※レコード名が同じ場合は上書かれます</div>
         </div>
         <div class="r2c2r2">
-            <by-save-input ></by-save-input>
+            <by-save-input [cond]="cond" [state]="state"></by-save-input>
         </div>
     </div>
 </div>  

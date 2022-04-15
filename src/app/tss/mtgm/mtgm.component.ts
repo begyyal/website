@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { selectById, Player } from 'constant/shogi/player';
-import { Motigoma } from 'model/shogi/motigoma';
+import { selectById, Player } from 'constant/tss/player';
+import { Motigoma } from 'model/tss/motigoma';
 
 @Component({
   selector: 'by-mtgm',

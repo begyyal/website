@@ -6,9 +6,9 @@ import { PaletteComponent } from './palette/palette.component';
 import { ResultDisplayComponent } from './result-display/result-display.component';
 import { SaveInputComponent } from './save-input/save-input.component';
 import { SaveHistoryComponent } from './save-history/save-history.component';
-import { ShogiComponent } from './shogi.component';
+import { TssComponent } from './tss.component';
 
-import { ShogiRoutingModule } from './shogi-routing.module';
+import { TssRoutingModule } from './tss-routing.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    ShogiComponent,
+    TssComponent,
     BanComponent,
     MtgmComponent,
     PaletteComponent,
@@ -31,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SaveHistoryComponent
   ],
   imports: [
-    ShogiRoutingModule,
+    TssRoutingModule,
     MatGridListModule,
     CommonModule,
     DragDropModule,
@@ -45,4 +45,4 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: []
 })
-export class ShogiModule { }
+export class TssModule { }

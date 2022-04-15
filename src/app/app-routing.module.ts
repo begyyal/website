@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'shogi', pathMatch: 'full' }
+  { path: '', redirectTo: 'tss', pathMatch: 'full' }
 ];
 
 @NgModule({

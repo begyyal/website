@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { MasuState } from 'model/shogi/masu-state';
-import { Motigoma } from 'model/shogi/motigoma';
-import { Observable, throwError } from 'rxjs';
+import { MasuState } from 'model/tss/masu-state';
+import { Motigoma } from 'model/tss/motigoma';
+import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { QCondition } from 'model/tss/q-condition';
 
 const calc_url = "http://localhost:8080/tss/exe";
 
@@ -14,19 +15,15 @@ export class TsSolver {
     constructor(private http: HttpClient) {
     }
 
-    calculate(
-        matrix: MasuState[],
-        senteMtgm: Motigoma[],
-        goteMtgm: Motigoma[],
-        tesuu: number) {
+    calculate(cond: QCondition) {
 
         const result = this.http
             .post<CalcResult>(calc_url,
                 {
-                    ban: this.convertBan(matrix),
-                    senteMtgm: this.convertMtgm(senteMtgm),
-                    goteMtgm: this.convertMtgm(goteMtgm),
-                    nom: tesuu
+                    ban: this.convertBan(cond.matrix),
+                    senteMtgm: this.convertMtgm(cond.senteMtgm),
+                    goteMtgm: this.convertMtgm(cond.goteMtgm),
+                    nom: cond.nom
                 })
             .pipe(
                 retry(3),
