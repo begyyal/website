@@ -5,7 +5,7 @@ import { Koma, select as selectKoma } from 'constant/shogi/koma';
 import { Player, selectById as selectPlayer } from 'constant/shogi/player';
 import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
 import { SessionManager } from 'service/session-manager';
-import { KihuRecord, FAILURE } from 'model/shogi/kihu-record'
+import { KihuRecord } from 'model/shogi/kihu-record'
 import { selectById as selectAct } from 'constant/shogi/kihu-act';
 import { selectById as selectRel } from 'constant/shogi/kihu-rel';
 import { selectById as selectOpt } from 'constant/shogi/kihu-opt';
@@ -27,6 +27,7 @@ export class ShogiComponent implements OnInit {
   goteMtgm: Motigoma[];
   nom: number;
   result: KihuRecord[];
+  state: number;
 
   constructor(private solver: TsSolver, private sm: SessionManager) {
 
@@ -35,12 +36,14 @@ export class ShogiComponent implements OnInit {
     this.sm.registStoreSetting("tss.goteMtgm", () => JSON.stringify(this.goteMtgm));
     this.sm.registStoreSetting("tss.nom", () => this.nom.toString());
     this.sm.registStoreSetting("tss.result", () => JSON.stringify(this.result));
+    this.sm.registStoreSetting("tss.state", () => this.state.toString());
 
     this.sm.registRetoreSetting("tss.matrix", (v) => this.matrix = JSON.parse(v));
     this.sm.registRetoreSetting("tss.senteMtgm", (v) => this.senteMtgm = JSON.parse(v));
     this.sm.registRetoreSetting("tss.goteMtgm", (v) => this.goteMtgm = JSON.parse(v));
     this.sm.registRetoreSetting("tss.nom", (v) => this.nom = Number.parseInt(v));
     this.sm.registRetoreSetting("tss.result", (v) => this.result = JSON.parse(v));
+    this.sm.registRetoreSetting("tss.state", (v) => this.state = Number.parseInt(v));
   }
 
   ngOnInit() {
@@ -73,6 +76,7 @@ export class ShogiComponent implements OnInit {
     this.senteMtgm = this.createMotigoma(Player.Sente);
     this.goteMtgm = this.createMotigoma(Player.Gote);
     this.result = [];
+    this.state = 0;
   }
 
   calc() {
@@ -82,10 +86,14 @@ export class ShogiComponent implements OnInit {
       this.goteMtgm,
       this.nom).subscribe({
         next: (r: CalcResult) => {
-          this.result = r.result.length == 0 ? [FAILURE] : this.mapping(r.result);
+          if (r.result.length != 0) {
+            this.result = this.mapping(r.result);
+            this.state = 1;
+          } else
+            this.state = 2;
         },
         error: (e: Error) => {
-          console.error(e);
+          this.state = 100;
         }
       });
   }
@@ -93,7 +101,6 @@ export class ShogiComponent implements OnInit {
   private mapping(res: any[]): KihuRecord[] {
     return res.map(r => {
       return {
-        failure: false,
         player: selectPlayer(r.player),
         fromSuzi: r.fromSuzi,
         fromDan: r.fromDan,

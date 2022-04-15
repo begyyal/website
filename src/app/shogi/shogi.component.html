@@ -30,7 +30,12 @@
                     <button mat-raised-button (click)="reset()">リセット</button>
                 </div>
             </div>
-            <by-result-display class="result-display" [result]="result" [rh]="rh"></by-result-display>
+            <by-result-display 
+                class="result-display" 
+                [result]="result" 
+                [rh]="rh"
+                [state]="state">
+            </by-result-display>
         </div>
     </div>
 </div>

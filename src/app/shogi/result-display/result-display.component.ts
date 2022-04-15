@@ -10,12 +10,9 @@ export class ResultDisplayComponent {
 
   @Input() rh: number;
   @Input() result: KihuRecord[];
+  @Input() state: number;
 
   constructor() {
-  }
-
-  getState() {
-    return this.result.length == 0 ? 0 : !this.result[0].failure ? 1 : 2;
   }
 
   summarize(rec: KihuRecord) {
@@ -33,5 +30,9 @@ export class ResultDisplayComponent {
     if (rec.opt != null)
       disp += rec.opt.desc;
     return disp;
+  }
+
+  getErrorMessage(){
+    return "エラーが発生しました。"
   }
 }
