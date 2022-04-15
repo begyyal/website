@@ -9,13 +9,15 @@ import { Motigoma } from 'model/shogi/motigoma';
 })
 export class SaveInputComponent implements OnInit {
 
+  value: string;
+
   constructor() {
+    this.value = "初期値";
   }
 
   ngOnInit() {
   }
 
-  save(){
-    
+  save() {
   }
 }

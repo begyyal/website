@@ -1,3 +1,31 @@
+:host{
+    width: 90%;
+    display: block;
+    min-width: 759px;
+    max-width: 1164px;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
 table {
     width: 100%;
+}
+
+button {
+    min-width: 80px;
+}
+
+.row1 {
+    display: flex;
+}
+
+.col1 {
+    width: 30%;
+}
+
+.col1, .col2, .col3, .col4, .col5 {
+    margin-left: 20px;
 }
