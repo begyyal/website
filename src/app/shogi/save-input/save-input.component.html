@@ -3,7 +3,7 @@
     <button mat-raised-button (click)="save()">保存</button>
 </div>
 <div class="col2">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" [color]="'accent'">
         <mat-label>レコード名</mat-label>
         <input matInput type="text" [(ngModel)]="value">
     </mat-form-field>
