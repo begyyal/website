@@ -25,9 +25,10 @@ export class SaveInputComponent implements OnInit {
   }
 
   save() {
+    const update = this.records.find(r => r.name == this.value);
     this.records = this.records.filter(r => r.name != this.value);
     const qr: QRecord = {
-      no: this.records.length + 1,
+      id: update ? update.id : this.saiban(),
       name: this.value,
       date: this.utils.getNowAsDateString(),
       state: this.state,
@@ -36,5 +37,12 @@ export class SaveInputComponent implements OnInit {
     this.records.push(qr);
     this.recordsChange.emit(this.records);
     localStorage.setItem(LsKey.Records, JSON.stringify(this.records));
+  }
+
+  saiban() {
+    for (let i = 1; i <= this.records.length; i++)
+      if (this.records.every(r => r.id != i))
+        return i;
+    return this.records.length + 1;
   }
 }

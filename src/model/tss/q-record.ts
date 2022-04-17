@@ -1,7 +1,7 @@
 import { QCondition } from './q-condition';
 
 export interface QRecord {
-    no: number;
+    id: number;
     name: string;
     date: string;
     state: number;
