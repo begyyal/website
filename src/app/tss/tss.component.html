@@ -65,5 +65,5 @@
     </div>
 </div>  
 <div class="row3">
-    <by-save-history [(records)]="records"></by-save-history>
+    <by-save-history [(records)]="records" (emRestore)="restore($event)"></by-save-history>
 </div>

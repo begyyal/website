@@ -3,10 +3,10 @@
         <h2>保存履歴</h2>
     </div>
     <div class="col2">
-        <button mat-raised-button (click)="import(true)">復元</button>
+        <button mat-raised-button (click)="resrore()" [disabled]="!avRestore">復元</button>
     </div>
     <div class="col3">
-        <button mat-raised-button (click)="delete()">削除</button>
+        <button mat-raised-button (click)="delete()" [disabled]="!avDelete">削除</button>
     </div>
     <div class="col4">
         <button mat-raised-button (click)="allDelete()">全削除</button>
@@ -32,7 +32,7 @@
     </th>
     <td mat-cell *matCellDef="let row">
       <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
+                    (change)="$event ? toggle(row) : null"
                     [checked]="selection.isSelected(row)">
       </mat-checkbox>
     </td>

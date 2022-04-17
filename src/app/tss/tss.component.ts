@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Motigoma } from 'model/tss/motigoma';
-import { select as selectKoma } from 'constant/tss/koma';
-import { selectById as selectPlayer } from 'constant/tss/player';
+import { select as selectKoma, Koma } from 'constant/tss/koma';
+import { selectById as selectPlayer, Player } from 'constant/tss/player';
 import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
 import { SessionManager } from 'service/session-manager';
 import { KihuRecord } from 'model/tss/kihu-record'
@@ -26,7 +26,7 @@ export class TssComponent implements OnInit {
   rh: number;
 
   records: QRecord[];
-  cond: QCondition = new QCondition();
+  cond: QCondition;
   result: KihuRecord[];
   state: number;
 
@@ -58,8 +58,23 @@ export class TssComponent implements OnInit {
     return temp > RH_MIN ? temp > RH_MAX ? RH_MAX : temp : RH_MIN;
   }
 
+  private createMotigoma(player: Player) {
+    return [Koma.Hisya, Koma.Kaku, Koma.Kin, Koma.Gin, Koma.Keima, Koma.Kyousya, Koma.Hu]
+      .map(k => {
+        return {
+          koma: k,
+          value: player == Player.Gote ? k.limit : 0
+        }
+      });
+  }
+
   reset() {
-    this.cond.reset();
+    this.cond = {
+      matrix: [...Array(81)].map((_, i) => null),
+      nom: 1,
+      senteMtgm: this.createMotigoma(Player.Sente),
+      goteMtgm: this.createMotigoma(Player.Gote),
+    };
     this.result = [];
     this.state = 0;
   }
@@ -102,5 +117,10 @@ export class TssComponent implements OnInit {
     const target = mtgm.find(m => m.koma.key == event.koma.key);
     if (target.value + event.value > event.koma.limit)
       target.value = event.koma.limit - event.value;
+  }
+
+  restore(record: QRecord) {
+    this.cond = record.cond;
+    this.state = record.state;
   }
 }

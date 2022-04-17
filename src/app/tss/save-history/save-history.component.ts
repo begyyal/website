@@ -14,7 +14,10 @@ export class SaveHistoryComponent implements OnInit {
   displayedColumns: string[] = ['select', 'id', 'name', 'date', 'state'];
   @Input() records: QRecord[];
   @Output() recordsChange = new EventEmitter<QRecord[]>();
+  @Output() emRestore = new EventEmitter<QRecord>();
   selection = new SelectionModel<QRecord>(true, []);
+  avRestore: boolean;
+  avDelete: boolean;
 
   constructor(private utils: XUtils) {
   }
@@ -24,6 +27,10 @@ export class SaveHistoryComponent implements OnInit {
 
   import(override: boolean) {
 
+  }
+
+  resrore() {
+    this.emRestore.emit(this.selection.selected[0]);
   }
 
   download() {
@@ -47,10 +54,20 @@ export class SaveHistoryComponent implements OnInit {
     return this.selection.selected.length === this.records.length;
   }
 
+  toggle(rec: QRecord) {
+    this.selection.toggle(rec);
+    this.avRestore = this.selection.selected.length == 1;
+    this.avDelete = this.selection.selected.length >= 1;
+  }
+
   masterToggle() {
-    if (this.isAllSelected())
+    if (this.isAllSelected()) {
       this.selection.clear();
-    else
+      this.avRestore = this.avDelete = false;
+    } else {
       this.selection.select(...this.records);
+      this.avRestore = this.records.length == 1;
+      this.avDelete = this.selection.selected.length >= 1;
+    }
   }
 }
