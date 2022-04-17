@@ -18,10 +18,10 @@ export class SaveInputComponent implements OnInit {
   value: string;
 
   constructor(private utils: XUtils) {
-    this.value = "初期値";
   }
 
   ngOnInit() {
+    this.value = "untitled_" + this.saiban();
   }
 
   save() {

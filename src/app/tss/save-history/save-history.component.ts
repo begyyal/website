@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { QRecord } from 'model/tss/q-record';
-import { XUtils } from 'service/x-utils';
 import { LsKey } from 'constant/tss/ls-key';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -11,7 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class SaveHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'id', 'name', 'date', 'state'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'nom', 'date', 'state'];
   @Input() records: QRecord[];
   @Output() recordsChange = new EventEmitter<QRecord[]>();
   @Output() emRestore = new EventEmitter<QRecord>();
@@ -19,7 +18,7 @@ export class SaveHistoryComponent implements OnInit {
   avRestore: boolean;
   avDelete: boolean;
 
-  constructor(private utils: XUtils) {
+  constructor() {
   }
 
   ngOnInit() {
