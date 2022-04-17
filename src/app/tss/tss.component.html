@@ -60,10 +60,10 @@
             <div>※レコード名が同じ場合は上書かれます</div>
         </div>
         <div class="r2c2r2">
-            <by-save-input [cond]="cond" [state]="state"></by-save-input>
+            <by-save-input [(records)]="records" [cond]="cond" [state]="state"></by-save-input>
         </div>
     </div>
 </div>  
 <div class="row3">
-    <by-save-history></by-save-history>
+    <by-save-history [(records)]="records"></by-save-history>
 </div>

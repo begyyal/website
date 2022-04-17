@@ -9,6 +9,9 @@ import { selectById as selectAct } from 'constant/tss/kihu-act';
 import { selectById as selectRel } from 'constant/tss/kihu-rel';
 import { selectById as selectOpt } from 'constant/tss/kihu-opt';
 import { QCondition } from 'model/tss/q-condition';
+import { BYType } from 'constant/by-type';
+import { QRecord } from 'model/tss/q-record';
+import { LsKey } from 'constant/tss/ls-key';
 
 const RH_MIN = 45, RH_MAX = 70;
 
@@ -19,22 +22,26 @@ const RH_MIN = 45, RH_MAX = 70;
 })
 export class TssComponent implements OnInit {
 
-  tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+  tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15];
   rh: number;
 
+  records: QRecord[];
   cond: QCondition = new QCondition();
   result: KihuRecord[];
   state: number;
 
   constructor(private solver: TsSolver, private sm: SessionManager) {
 
-    this.sm.registStoreSetting("tss.cond", () => JSON.stringify(this.cond));
-    this.sm.registStoreSetting("tss.result", () => JSON.stringify(this.result));
-    this.sm.registStoreSetting("tss.state", () => this.state.toString());
+    const str = localStorage.getItem(LsKey.Records);
+    this.records = str == null ? [] : JSON.parse(str);
 
-    this.sm.registRetoreSetting("tss.cond", (v) => this.cond = JSON.parse(v));
-    this.sm.registRetoreSetting("tss.result", (v) => this.result = JSON.parse(v));
-    this.sm.registRetoreSetting("tss.state", (v) => this.state = Number.parseInt(v));
+    this.sm.registStoreSetting(BYType.TSS, "cond", () => JSON.stringify(this.cond));
+    this.sm.registStoreSetting(BYType.TSS, "result", () => JSON.stringify(this.result));
+    this.sm.registStoreSetting(BYType.TSS, "state", () => this.state.toString());
+
+    this.sm.registRetoreSetting(BYType.TSS, "cond", (v) => this.cond = JSON.parse(v));
+    this.sm.registRetoreSetting(BYType.TSS, "result", (v) => this.result = JSON.parse(v));
+    this.sm.registRetoreSetting(BYType.TSS, "state", (v) => this.state = Number.parseInt(v));
   }
 
   ngOnInit() {

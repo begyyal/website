@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BYType } from 'constant/by-type';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +9,7 @@ export class SessionManager {
     storeSettings: (() => void)[] = [];
     restoreSettings: (() => void)[] = [];
 
-    constructor() {}
+    constructor() { }
 
     onBeforeUnload(event: any) {
         this.storeSettings.forEach(s => s());
@@ -18,14 +19,20 @@ export class SessionManager {
         this.restoreSettings.forEach(s => s());
     }
 
-    registStoreSetting(key: string, getValue: () => string) {
-        this.storeSettings.push(() => sessionStorage.setItem(key, getValue()));
+    registStoreSetting(type: BYType, key: string, getValue: () => string) {
+        const k = this.concatKeys(type, key);
+        this.storeSettings.push(() => sessionStorage.setItem(k, getValue()));
     }
 
-    registRetoreSetting(key: string, setValue: (v: string) => void) {
+    registRetoreSetting(type: BYType, key: string, setValue: (v: string) => void) {
+        const k = this.concatKeys(type, key);
         this.restoreSettings.push(() => {
-            if(sessionStorage.getItem(key) != null)
-                setValue(sessionStorage.getItem(key));
+            if (sessionStorage.getItem(k) != null)
+                setValue(sessionStorage.getItem(k));
         });
+    }
+
+    concatKeys(type: BYType, key: string) {
+        return type.key + "." + key;
     }
 }
