@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { QRecord } from 'model/tss/q-record';
 import { LsKey } from 'constant/tss/ls-key';
 import { SelectionModel } from '@angular/cdk/collections';
+import { XUtils } from 'service/x-utils';
 
 @Component({
   selector: 'by-save-history',
@@ -17,14 +18,15 @@ export class SaveHistoryComponent implements OnInit {
   selection = new SelectionModel<QRecord>(true, []);
   avRestore: boolean;
   avDelete: boolean;
+  exFileName: string;
 
-  constructor() {
+  constructor(private utils: XUtils) {
   }
 
   ngOnInit() {
   }
 
-  import(override: boolean) {
+  import() {
 
   }
 
@@ -33,7 +35,11 @@ export class SaveHistoryComponent implements OnInit {
   }
 
   download() {
-
+    const a = document.createElement('a');
+    const blob = new Blob([JSON.stringify(this.records)], { type: 'application/json' });
+    a.href = window.URL.createObjectURL(blob);
+    a.download = "tss_records_" + this.utils.getNowAsDateString() + ".json";
+    a.click();
   }
 
   delete() {
