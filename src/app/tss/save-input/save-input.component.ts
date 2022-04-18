@@ -3,6 +3,7 @@ import { QCondition } from 'model/tss/q-condition';
 import { QRecord } from 'model/tss/q-record';
 import { XUtils } from 'service/x-utils';
 import { LsKey } from 'constant/tss/ls-key';
+import { CondConverter } from 'service/shogi/cond-converter';
 
 @Component({
   selector: 'by-save-input',
@@ -17,7 +18,7 @@ export class SaveInputComponent implements OnInit {
   @Input() state: number;
   value: string;
 
-  constructor(private utils: XUtils) {
+  constructor(private utils: XUtils, private converter: CondConverter) {
   }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class SaveInputComponent implements OnInit {
       name: this.value,
       date: this.utils.getNowAsDateString(),
       state: this.state,
-      cond: this.cond
+      cond: this.converter.regular2smart(this.cond)
     };
     this.records.push(qr);
     this.recordsChange.emit(this.records);

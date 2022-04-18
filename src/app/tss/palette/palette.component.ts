@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { selectById } from 'constant/tss/player';
 import { selectByIndex } from 'constant/tss/koma';
 import { DispMasuState } from 'model/tss/masu-state';
+import { TssCommons } from 'service/shogi/tss-commons';
 
 @Component({
   selector: 'by-palette',
@@ -15,7 +16,7 @@ export class PaletteComponent implements OnInit {
   states: DispMasuState[];
   masu_ids = [...Array(81)].map((_, i) => "masu_" + i);
 
-  constructor() {
+  constructor(private commons: TssCommons) {
   }
 
   ngOnInit() {
@@ -28,12 +29,13 @@ export class PaletteComponent implements OnInit {
         if (i == 8 || i == 11)
           return null;
         const p = selectById(playerId);
+        const k = selectByIndex(i);
         return {
           player: p,
-          koma: selectByIndex(i),
+          koma: k,
           suzi: -1,
           dan: -1,
-          imagePath: "assets/koma/" + p.desc1 + "/" + i + ".png"
+          imagePath: this.commons.getImagePath(k, p)
         };
       });
   }

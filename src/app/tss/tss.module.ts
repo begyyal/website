@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ByDialogModule } from 'app/common/dialog/dialog.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ByDialogModule
   ],
   providers: []
 })

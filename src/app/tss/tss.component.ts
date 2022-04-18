@@ -12,8 +12,8 @@ import { QCondition } from 'model/tss/q-condition';
 import { BYType } from 'constant/by-type';
 import { QRecord } from 'model/tss/q-record';
 import { LsKey } from 'constant/tss/ls-key';
-
-const RH_MIN = 45, RH_MAX = 70;
+import { CondConverter } from 'service/shogi/cond-converter';
+import { NOM_OP_VALUES, RH_MAX, RH_MIN } from 'constant/tss/config';
 
 @Component({
   selector: 'by-tss',
@@ -22,15 +22,17 @@ const RH_MIN = 45, RH_MAX = 70;
 })
 export class TssComponent implements OnInit {
 
-  tesuu_op_values = [1, 3, 5, 7, 9, 11, 13, 15];
   rh: number;
-
+  nomOpValues = NOM_OP_VALUES;
   records: QRecord[];
   cond: QCondition;
   result: KihuRecord[];
   state: number;
 
-  constructor(private solver: TsSolver, private sm: SessionManager) {
+  constructor(
+    private solver: TsSolver,
+    private sm: SessionManager,
+    private converter: CondConverter) {
 
     const str = localStorage.getItem(LsKey.Records);
     this.records = str == null ? [] : JSON.parse(str);
@@ -120,7 +122,7 @@ export class TssComponent implements OnInit {
   }
 
   restore(record: QRecord) {
-    this.cond = record.cond;
+    this.cond = this.converter.smart2regular(record.cond);
     this.state = record.state;
   }
 }
