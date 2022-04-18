@@ -26,7 +26,7 @@ export class TsSolver {
                     nom: cond.nom
                 })
             .pipe(
-                retry(3),
+                retry(1),
                 catchError(this.handleError)
             );
 

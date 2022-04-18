@@ -10,6 +10,9 @@
         <div *ngIf="state==2">
             <label>詰めませんでした。</label>
         </div>
+        <div *ngIf="state==3">
+            <label>計算中...</label>
+        </div>
         <div *ngIf="state>=100">
             <label class="err">{{getErrorMessage()}}</label>
         </div>

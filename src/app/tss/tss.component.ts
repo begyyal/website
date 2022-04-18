@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Motigoma } from 'model/tss/motigoma';
 import { select as selectKoma, Koma } from 'constant/tss/koma';
 import { selectById as selectPlayer, Player } from 'constant/tss/player';
-import { TsSolver, CalcResult } from 'service/shogi/ts-solver';
+import { TsSolver, CalcResult } from 'service/tss/ts-solver';
 import { SessionManager } from 'service/session-manager';
 import { KihuRecord } from 'model/tss/kihu-record'
 import { selectById as selectAct } from 'constant/tss/kihu-act';
@@ -12,7 +12,7 @@ import { QCondition } from 'model/tss/q-condition';
 import { BYType } from 'constant/by-type';
 import { QRecord } from 'model/tss/q-record';
 import { LsKey } from 'constant/tss/ls-key';
-import { CondConverter } from 'service/shogi/cond-converter';
+import { CondConverter } from 'service/tss/cond-converter';
 import { NOM_OP_VALUES, RH_MAX, RH_MIN } from 'constant/tss/config';
 
 @Component({
@@ -82,6 +82,7 @@ export class TssComponent implements OnInit {
   }
 
   calc() {
+    this.state = 3;
     this.solver.calculate(this.cond)
       .subscribe({
         next: (r: CalcResult) => {

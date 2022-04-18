@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="button">
-                    <button mat-raised-button (click)="calc()">計算する</button>
+                    <button mat-raised-button (click)="calc()" [disabled]="state==3">計算する</button>
                     <button mat-raised-button (click)="reset()">リセット</button>
                 </div>
             </div>

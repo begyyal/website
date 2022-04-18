@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { selectById } from 'constant/tss/player';
 import { selectByIndex } from 'constant/tss/koma';
 import { DispMasuState } from 'model/tss/masu-state';
-import { TssCommons } from 'service/shogi/tss-commons';
+import { TssCommons } from 'service/tss/tss-commons';
 
 @Component({
   selector: 'by-palette',

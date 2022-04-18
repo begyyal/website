@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { DispMasuState } from 'model/tss/masu-state';
-import { TssCommons } from 'service/shogi/tss-commons';
+import { TssCommons } from 'service/tss/tss-commons';
 
 @Component({
   selector: 'by-ban',

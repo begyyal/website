@@ -3,7 +3,7 @@ import { QCondition } from 'model/tss/q-condition';
 import { QRecord } from 'model/tss/q-record';
 import { XUtils } from 'service/x-utils';
 import { LsKey } from 'constant/tss/ls-key';
-import { CondConverter } from 'service/shogi/cond-converter';
+import { CondConverter } from 'service/tss/cond-converter';
 
 @Component({
   selector: 'by-save-input',
