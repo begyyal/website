@@ -8,7 +8,6 @@ import { SaveInputComponent } from './save-input/save-input.component';
 import { SaveHistoryComponent } from './save-history/save-history.component';
 import { TssComponent } from './tss.component';
 
-import { TssRoutingModule } from './tss-routing.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
@@ -19,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ByDialogModule } from 'app/common/dialog/dialog.module';
 
 @NgModule({
@@ -33,7 +31,6 @@ import { ByDialogModule } from 'app/common/dialog/dialog.module';
     SaveHistoryComponent
   ],
   imports: [
-    TssRoutingModule,
     MatGridListModule,
     CommonModule,
     DragDropModule,
@@ -44,7 +41,6 @@ import { ByDialogModule } from 'app/common/dialog/dialog.module';
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
-    BrowserAnimationsModule,
     ByDialogModule
   ],
   providers: []

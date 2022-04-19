@@ -13,7 +13,9 @@ import { BYType } from 'constant/by-type';
 import { QRecord } from 'model/tss/q-record';
 import { LsKey } from 'constant/tss/ls-key';
 import { CondConverter } from 'service/tss/cond-converter';
-import { NOM_OP_VALUES, RH_MAX, RH_MIN } from 'constant/tss/config';
+import { NOM_OP_VALUES } from 'constant/tss/config';
+
+const RH_MIN = 45, RH_MAX = 70;
 
 @Component({
   selector: 'by-tss',

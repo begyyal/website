@@ -1,5 +1,31 @@
-<mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
+<div (window:resize)="onResize($event)"></div>
+<mat-sidenav-container class="sidenavContainer">
+    <mat-sidenav mode="side" opened>
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="t.path" *ngFor="let t of types"> 
+                <mat-icon class="homeIcon" *ngIf="t.key=='home'" aria-hidden="false">home</mat-icon>
+                <label *ngIf="t.key=='home' && full">{{ t.desc1 }}</label>
+                <label *ngIf="t.key!='home'">{{ full ? t.desc1 : t.desc2 }}</label>
+            </a>
+        </mat-nav-list>
+        <footer class="sidenavFooter">
+            <div class="fr1" [style]="footerStyle">            
+                <div class="link">
+                    <a mat-icon-button href="https://github.com/begyyal">
+                        <mat-icon role="img" svgIcon="github" aria-hidden="true"></mat-icon>
+                    </a>
+                </div>
+                <div class="link">
+                    <a mat-icon-button href="https://twitter.com/begyyal">
+                        <mat-icon role="img" svgIcon="twitter" aria-hidden="true"></mat-icon>
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="full" class="copyright">
+                ©2022 begyyal
+            </div>
+        </footer>
+    </mat-sidenav>
     <mat-sidenav-content>
         <ng-content></ng-content>
     </mat-sidenav-content>
